@@ -44,13 +44,13 @@ export class CreateBookingDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  price: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
   status: string;
 
   @ApiProperty()
   @IsNotEmpty()
   car: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  available: boolean;
 }

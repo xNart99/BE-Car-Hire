@@ -21,7 +21,9 @@ export class BookingService {
   }
 
   async getBookingDetail(id: string) {
-    const result = await this.bookingModel.findById(id);
+    const result = await this.bookingModel.findById(id).populate({
+      path: 'car',
+    });
     return {
       data: result,
     };

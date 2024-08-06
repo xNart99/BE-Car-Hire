@@ -19,6 +19,10 @@ import { CreateCarDto } from './car.dto';
 export class CarController {
   constructor(private carService: CarService) {}
 
+  @Get('/search/:location')
+  searchCars(@Param('location') location: string) {
+    return this.carService.searchCar(location);
+  }
   @UseGuards(AuthGuard('jwt'))
   @Get()
   getAllCars() {

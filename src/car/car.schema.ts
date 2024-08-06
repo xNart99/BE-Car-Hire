@@ -72,6 +72,11 @@ export class Car {
     required: true,
   })
   hybrid: boolean;
+
+  @Prop({
+    required: true,
+  })
+  available: boolean;
 }
 
 export const CarSchema = SchemaFactory.createForClass(Car);

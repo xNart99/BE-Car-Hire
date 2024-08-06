@@ -9,6 +9,16 @@ import { CreateCarDto } from './car.dto';
 export class CarService {
   constructor(@InjectModel('Car') private readonly carModel: Model<Car>) {}
 
+  async searchCar(location) {
+    const result = await this.carModel.find({
+      available: true,
+      location: location,
+    });
+    return {
+      data: result,
+    };
+  }
+
   async getAllCar() {
     const result = await this.carModel.find();
     return {

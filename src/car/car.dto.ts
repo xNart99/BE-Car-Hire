@@ -57,4 +57,8 @@ export class CreateCarDto {
   @ApiProperty()
   @IsNotEmpty()
   hybrid: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  available: boolean;
 }

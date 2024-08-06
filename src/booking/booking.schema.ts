@@ -8,11 +8,6 @@ export class Booking {
   @Prop({
     required: true,
   })
-  available: boolean;
-
-  @Prop({
-    required: true,
-  })
   bookingRef: string;
 
   @Prop({
@@ -54,6 +49,10 @@ export class Booking {
     required: true,
   })
   phone: string;
+  @Prop({
+    required: true,
+  })
+  price: string;
   @Prop({
     required: true,
     enum: ['PENDING', 'PROGRESSING', 'COMPLETED', 'CANCELED'],
