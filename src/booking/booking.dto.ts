@@ -54,3 +54,19 @@ export class CreateBookingDto {
   @IsNotEmpty()
   car: string;
 }
+
+export class UpdateBookingDto extends CreateBookingDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  carOld: string;
+}
+
+export class SearchBooking {
+  @ApiProperty()
+  @IsNotEmpty()
+  bookingRef: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  lastName: string;
+}

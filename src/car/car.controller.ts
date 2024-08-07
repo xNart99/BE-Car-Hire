@@ -24,6 +24,12 @@ export class CarController {
     return this.carService.searchCar(location);
   }
   @UseGuards(AuthGuard('jwt'))
+  @Get('overview')
+  getCarOverview() {
+    return this.carService.overView();
+  }
+
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   getAllCars() {
     return this.carService.getAllCar();

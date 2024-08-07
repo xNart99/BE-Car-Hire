@@ -10,12 +10,26 @@ import {
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { BookingService } from './booking.service';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateBookingDto } from './booking.dto';
+import {
+  CreateBookingDto,
+  SearchBooking,
+  UpdateBookingDto,
+} from './booking.dto';
 @ApiTags('bookings')
 @ApiBearerAuth()
 @Controller('booking')
 export class BookingController {
   constructor(private bookingService: BookingService) {}
+
+  @Post('/booking-client')
+  getBookingClient(@Body() payload: SearchBooking) {
+    return this.bookingService.getBookingClient(payload);
+  }
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/overview')
+  getOver() {
+    return this.bookingService.overView();
+  }
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
@@ -37,7 +51,7 @@ export class BookingController {
 
   @UseGuards(AuthGuard('jwt'))
   @Put('/update/:id')
-  updateUser(@Param('id') id: string, @Body() booking: CreateBookingDto) {
+  updateUser(@Param('id') id: string, @Body() booking: UpdateBookingDto) {
     return this.bookingService.updateBooking(id, booking);
   }
 }

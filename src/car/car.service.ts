@@ -12,10 +12,25 @@ export class CarService {
   async searchCar(location) {
     const result = await this.carModel.find({
       available: true,
-      location: location,
+      location: {
+        $regex: location,
+        $options: 'i',
+      },
     });
     return {
       data: result,
+    };
+  }
+
+  async overView() {
+    const totalCar = await this.carModel.find();
+    const carAvailables = totalCar.filter((item) => item.available).length;
+    const carUnavailabes = totalCar.filter((item) => !item.available).length;
+
+    return {
+      totalCar: totalCar.length,
+      carAvailables,
+      carUnavailabes,
     };
   }
 

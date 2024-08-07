@@ -7,3 +7,10 @@ export const MESSAGE_COMMON = {
   CREATED_SUCCESSFULLY: 'Created successfully !',
   UPDATED_SUCCESSFULLY: 'Updated successfully !',
 };
+
+export const STATUS = {
+  PENDING: 'PENDING',
+  PROGRESSING: 'PROGRESSING',
+  COMPLETED: 'COMPLETED',
+  CANCELED: 'CANCELED',
+};

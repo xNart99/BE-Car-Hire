@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from 'src/auth/strategy';
 import { BookingSchema } from './booking.schema';
+import { CarSchema } from "../car/car.schema";
 
 @Module({
   imports: [
@@ -13,6 +14,10 @@ import { BookingSchema } from './booking.schema';
       {
         name: 'Booking',
         schema: BookingSchema,
+      },
+      {
+        name: 'Car',
+        schema: CarSchema,
       },
     ]),
     JwtModule.registerAsync({
