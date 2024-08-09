@@ -93,13 +93,35 @@ export class BookingService {
 
   async updateBooking(id: string, booking: UpdateBookingDto) {
     try {
+      const currentBooking = await this.bookingModel.findById(id);
+
       await this.bookingModel.findByIdAndUpdate(id, booking);
-      await this.carModel.findByIdAndUpdate(booking.carOld, {
-        available: true,
-      });
-      await this.carModel.findByIdAndUpdate(booking.car, {
-        available: false,
-      });
+
+      if (
+        booking.status === STATUS.CANCELED ||
+        booking.status === STATUS.COMPLETED
+      ) {
+        await this.carModel.findByIdAndUpdate(currentBooking.car, {
+          available: true,
+        });
+      } else if (
+        booking.status === STATUS.PENDING ||
+        booking.status === STATUS.PROGRESSING
+      ) {
+        await this.carModel.findByIdAndUpdate(currentBooking.car, {
+          available: false,
+        });
+      }
+
+      if (currentBooking.car.toString() !== booking.car.toString()) {
+        await this.carModel.findByIdAndUpdate(currentBooking.car, {
+          available: true,
+        });
+        await this.carModel.findByIdAndUpdate(booking.car, {
+          available: false,
+        });
+      }
+
       return {
         updated: true,
         message: MESSAGE_COMMON.UPDATED_SUCCESSFULLY,
