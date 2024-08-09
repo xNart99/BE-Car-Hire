@@ -40,7 +40,7 @@ export class UserService {
   }
 
   async getAllUsers() {
-    const result = await this.userModel.find();
+    const result = await this.userModel.find({ role: { $ne: 'ADMIN' } });
     return {
       data: result,
     };
